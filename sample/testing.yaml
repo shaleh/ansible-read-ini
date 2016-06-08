@@ -1,0 +1,15 @@
+---
+- hosts: local
+  connection: local
+
+  tasks:
+    - name: Test read_ini
+      action: read_ini path="sample.ini" section="section1" option="option2"
+      register: ini_data
+
+    - debug: msg="section1:option2 is {{ini_data.value}}"
+
+    - name: Test missing section
+      action: read_ini path="sample.ini" section="section3" option="option2"
+      register: ini_data
+
